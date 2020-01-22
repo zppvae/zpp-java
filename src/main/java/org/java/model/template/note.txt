@@ -1,0 +1,14 @@
+模板方法模式在Servlet中的应用
+	httpServlet：doGet() doPost() service()
+
+应用场景：
+    spring 中对 Hibernate 的支持，将一些已经定好的方法封装起来，比如开启事务、获取 Session、关闭 Session 等
+
+
+JDK中的模板方法模式：
+   让子类可以重写方法的一部分，而不是整个重写，你可以控制子类需要重写那些操作
+
+java.util.Collections#sort()
+java.io.InputStream#skip()
+java.io.InputStream#read()
+java.util.AbstractList#indexOf()
