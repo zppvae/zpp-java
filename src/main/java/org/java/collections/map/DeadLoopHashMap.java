@@ -16,22 +16,30 @@ import java.util.UUID;
  */
 public class DeadLoopHashMap {
 
+	private static HashMap<Integer, String> map = new HashMap<Integer, String>(2,1.5f);
+
 	public static void main(String[] args) throws InterruptedException {
-		final HashMap<String, String> map = new HashMap<String, String>(2);
+		map.put(5,"C");
+		map.put(7,"B");
+		map.put(3,"A");
+
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				for (int i = 0; i < 1000000; i++) {
-					new Thread(new Runnable() {
-						@Override
-						public void run() {
-							map.put(UUID.randomUUID().toString(), "");
-						}
-					}, "ftf" + i).start();
-				}
+				map.put(15,"D");
+				System.out.println(map);
 			}
-		}, "ftf");
+		}, "t1");
 		t.start();
-		t.join();
+
+		Thread t2 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				map.put(1,"E");
+				System.out.println(map);
+			}
+		}, "t2");
+		t2.start();
+
 	}
 }

@@ -6,6 +6,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
+/**
+ * 比如面试，等一个人面试完了以后，后一个人才能进来继续面试
+ */
 @Slf4j
 public class SemaphoreExample1 {
 

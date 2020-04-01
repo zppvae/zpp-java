@@ -6,6 +6,10 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ *
+ * 比如面试，等10人到齐后一起面试
+ */
 @Slf4j
 public class CountDownLatchExample1 {
 
