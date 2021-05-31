@@ -4,29 +4,28 @@ package org.java.model.singleton;
 import org.java.annotations.ThreadSafe;
 
 /**
- * 饿汉模式
- * 单例实例在类装载时进行创建
+ * 饿汉模式（静态代码块）
  */
 @ThreadSafe
-public class SingletonExample6 {
+public class Singleton2 {
 
     // 私有构造函数
-    private SingletonExample6() {
+    private Singleton2() {
 
     }
 
     // 单例对象
     //A、B代码前后顺序对结果会影响instance的值
     //A
-    private static SingletonExample6 instance = null;
+    private static  final Singleton2 instance;
 
     //B
     static {
-        instance = new SingletonExample6();
+        instance = new Singleton2();
     }
 
     // 静态的工厂方法
-    public static SingletonExample6 getInstance() {
+    public static Singleton2 getInstance() {
         return instance;
     }
 

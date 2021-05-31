@@ -5,16 +5,12 @@ import org.java.annotations.Recommend;
 import org.java.annotations.ThreadSafe;
 
 /**
- * 枚举模式：最安全
+ * 枚举模式：最安全（生产环境使用）
  */
 @ThreadSafe
 @Recommend
 public class SingletonEnum {
-
-    // 私有构造函数
-    private SingletonEnum() {
-
-    }
+    private SingletonEnum() {}
 
     public static SingletonEnum getInstance() {
         return Singleton.INSTANCE.getInstance();

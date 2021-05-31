@@ -3,7 +3,7 @@ package org.java.model.singleton;
 import org.java.annotations.ThreadSafe;
 
 /**
- * 懒汉式-线程安全
+ * 懒汉式-线程安全   引入编程复杂性
  * @author zpp
  * @date 2019/8/30 16:22
  */
@@ -14,9 +14,7 @@ public class SingletonInnerClass {
         private final static SingletonInnerClass instance = new SingletonInnerClass();
     }
 
-    private SingletonInnerClass(){
-
-    }
+    private SingletonInnerClass(){ }
 
     public static SingletonInnerClass getInstance(){
         return InnerClass.instance;

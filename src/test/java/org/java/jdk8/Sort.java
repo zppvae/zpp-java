@@ -1,7 +1,5 @@
 package org.java.jdk8;
 
-import org.java.sort.SortUtil;
-
 import java.util.Arrays;
 
 /**

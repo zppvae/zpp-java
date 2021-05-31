@@ -19,6 +19,8 @@ public class AtomicBooleanTest {
 
     private static AtomicBoolean isHappened = new AtomicBoolean(false);
 
+    private volatile static int count = 0;
+
     // 请求总数
     public static int clientTotal = 5000;
 
@@ -43,12 +45,15 @@ public class AtomicBooleanTest {
         }
         countDownLatch.await();
         executorService.shutdown();
+        log.info("count: {}",count);
         log.info("isHappened:{}", isHappened.get());
     }
 
     private static void test() {
         if (isHappened.compareAndSet(false, true)) {
             log.info("execute");
+        } else {
+            count ++;
         }
     }
 }

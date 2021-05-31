@@ -1,4 +1,4 @@
-package org.java.sort;
+package org.java.util;
 
 /**
  * @author zpp
@@ -9,6 +9,13 @@ public class SortUtil {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
+    }
+
+    public static void print(int[] arr){
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
     }
 
 }

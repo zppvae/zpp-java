@@ -34,7 +34,11 @@ public class StreamDemo {
 //			System.out.println(item);
 //		});
 
-		listToMap();
+//		listToMap();
+		Integer[] steps = {-4,-3,-2,-1,0,1,2,3,4};
+		IntStream.range(0,steps.length).forEach(i ->{
+			System.out.println(steps[i]);
+		});
 	}
 
 
