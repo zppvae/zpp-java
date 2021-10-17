@@ -1,12 +1,14 @@
 package org.java.jdk8;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import cn.hutool.core.util.RandomUtil;
+import com.alibaba.fastjson.JSONObject;
+
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.stream.Collectors;
 
 /**
  *  实现CompletionStage接口（40余个方法）
@@ -337,8 +339,54 @@ public class CompletableFutureDemo {
 		System.out.println(result);
 	}
 
+	private static List<List<JSONObject>> asyncGetData(){
+		List<JSONObject> list = new ArrayList<>();
+		for (int i = 0; i < 10000; i++) {
+			JSONObject tmp = new JSONObject();
+			tmp.put("money", RandomUtil.randomInt(20000));
+			list.add(tmp);
+		}
+
+		ExecutorService executor = Executors.newFixedThreadPool(20, new ThreadFactory() {
+			int count = 1;
+			@Override
+			public Thread newThread(Runnable runnable) {
+				return new Thread(runnable, "executor-" + count++);
+			}
+		});
+		List<CompletableFuture<List<JSONObject>>> futures = list.stream()
+				.map(item -> CompletableFuture.supplyAsync(() -> {
+					return getData(item.getIntValue("money"));
+				},executor))
+				.collect(Collectors.toList());
+
+		return futures
+				.stream()
+				.filter(t -> t != null)
+				.map(CompletableFuture::join)
+				.collect(Collectors.toList());
+	}
+
+	private static List<JSONObject> getData(int s){
+		System.out.println("当前线程；"+ Thread.currentThread().getName());
+		try {
+			Thread.sleep(RandomUtil.randomLong(500));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		List<JSONObject> list = new ArrayList<>();
+		JSONObject data = null;
+		for (int i = 0; i < s; i++) {
+			data = new JSONObject();
+			data.put("a", i);
+			data.put("b", RandomUtil.randomInt(100));
+			list.add(data);
+		}
+		return list;
+	}
 
 	public static void main(String[] args) throws InterruptedException {
-		handle();
+//		handle();
+		System.out.println(asyncGetData());
 	}
 }
