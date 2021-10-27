@@ -29,6 +29,8 @@ public class LongAdderTest {
         }
         long end = System.currentTimeMillis();
         log.info("--{}",al.sum());
+        al.add(1L);
+        log.info("---" + al.sum());
         log.info("耗时：{}",(end - start));
     }
 

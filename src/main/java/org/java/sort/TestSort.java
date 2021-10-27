@@ -8,24 +8,29 @@ public class TestSort {
 
     public static void main(String[] args) {
         int[] arr = {10, 2, 6, 8, 11, 9, 7, 3, 7, 12};
-        int[] a = sort(arr);
-        System.out.println(Arrays.toString(a));
+        sort(arr, 0, arr.length - 1);
+        System.out.println(Arrays.toString(arr));
     }
 
-    public static int[] sort(int[] arr) {
-        for (int i = 1; i < arr.length; i++) {
-           int temp = arr[i];
-           int j;
-            for (j = i - 1; j >= 0; j--) {
-                if (arr[j] > temp) {
-                    arr[j + 1] = arr[j];
-                } else {
-                    break;
-                }
-            }
-            arr[j + 1] = temp;
+    public static void sort(int[] arr, int left, int right) {
+        if (left < right) {
+            int part = devide(arr, left, right);
+            sort(arr, left, part -1);
+            sort(arr,part + 1, right);
         }
-        return arr;
     }
 
+    public static int devide(int[] arr, int left, int right) {
+        int part = left;
+        int index = part + 1;
+
+        for (int i = index; i <= right; i++) {
+            if (arr[i] < arr[part]) {
+                SortUtil.swap(arr, i, index);
+                index++;
+            }
+        }
+        SortUtil.swap(arr, part, index - 1);
+        return index - 1;
+    }
 }
