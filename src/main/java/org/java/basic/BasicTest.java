@@ -23,9 +23,16 @@ public class BasicTest {
 //
 //        System.out.println(Float.compare(f, e));
 
-        String s1 = new String("abc");
-        String s2 = new String("abc");
-        System.out.println(s1.equals(s2));
-        System.out.println(s2.hashCode());
+//        String s1 = new String("abc");
+//        String s2 = new String("abc");
+//        System.out.println(s1.equals(s2));
+//        System.out.println(s2.hashCode());
+
+        // 当未对vm中的Integercache进行设置的时候其默认值127，cache数组也就是从-128到127
+        // 当设置了-XX:AutoBoxCacheMax=1024 参数后，Integercache值就取决于参数得大小
+        Integer a = 1000, b = 1000;
+        Integer c = 100, d = 100;
+        System.out.println("(a == b) = " + (a == b));
+        System.out.println("(c == d) = " + (c == d));
 	}
 }

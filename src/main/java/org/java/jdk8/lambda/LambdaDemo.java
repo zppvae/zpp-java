@@ -78,6 +78,15 @@ public class LambdaDemo {
 //                .collect(Collectors.toList());
 //        System.out.println(collect);
 
+
+        // 获取最大值
+        Person p1 = new Person(1, "zz");
+        Person p2 = new Person(2, "22");
+        Person p3 = new Person(3, "221");
+
+        List<Person> list = Arrays.asList(p1, p2, p3);
+        Integer maxAge = list.stream().max(Comparator.comparingInt(Person::getAge)).get().getAge();
+        System.out.println(maxAge);
     }
 
     static class Person{
